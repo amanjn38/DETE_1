@@ -55,9 +55,9 @@ public class RegisterActivity extends AppCompatActivity {
                     public void done(ParseException e) {
 
                         if (e == null) {
-                            FancyToast.makeText(RegisterActivity.this, parseUser.get("Username") + " is signed up succesfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true);
+                            FancyToast.makeText(RegisterActivity.this, parseUser.get("Username") + " is signed up succesfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
                         } else {
-                            FancyToast.makeText(RegisterActivity.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true);
+                            FancyToast.makeText(RegisterActivity.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
                         }
                     }
                 });

@@ -14,10 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
+import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView ivFacebook, ivTwitter, ivGoogle;
@@ -52,19 +55,19 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("KickBoxer");
-                parseQuery.getInBackground("pPgk66eJT4", new GetCallback<ParseObject>() {
-                    @Override
-                    public void done(ParseObject object, ParseException e) {
-                        if(object!=null && e==null)
-                        {
-                            getTe.setText(object.get("name")+ "");
-                        }
 
+                ParseUser.logInInBackground(etUserName.getText().toString(),
+                etPassword.getText().toString(), new LogInCallback() {
+                    @Override
+                    public void done(ParseUser user, ParseException e) {
+                        if(user!=null&& e==null)
+                        {
+                            FancyToast.makeText(MainActivity.this, user.get("username") + " is logged in succesfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+                        } else {
+                            FancyToast.makeText(MainActivity.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
+                        }
                     }
                 });
-
-
             }
         });
 
